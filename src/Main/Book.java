@@ -1,4 +1,5 @@
 package Main;
 
-public class Book {
+public class Book{
+
 }
