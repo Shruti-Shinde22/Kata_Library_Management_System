@@ -15,8 +15,10 @@ public class LibraryTests {
     private LibraryInterface library;
     private BookInterface book;
 
+
+    //sets up the object with fixed values for each test
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws Exception {
         library = new Library();
         book = new Book(
                 "123456",
@@ -24,30 +26,32 @@ public class LibraryTests {
                 "James Clear",
                 2018
         );
-        try {
-            library.addBook(book);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        library.addBook(book);
     }
 
+    //to verify correctly adding the book to libarray
     @Test
     public void testAddbook(){
         assertEquals(1,library.viewAvailabeBooks().size());
     }
 
+    //to verify book borrowing
     @Test
     public void testBookBorrowSuccess() throws Exception {
         library.bookBorrow(book.getIsbn());
         assertTrue(book.isBorrowed());
     }
 
+
+    //to verify already borrowed book borrowed again throws exception or not
     @Test
     public void testBookBorrowFailure() throws Exception {
         library.bookBorrow(book.getIsbn());
         assertThrows(BookNotAvailable.class, ()->library.bookBorrow(book.getIsbn()));
     }
 
+
+    //to verify book returning
     @Test
     public void testBookReturnSuccess() throws Exception {
         library.bookBorrow(book.getIsbn());
@@ -55,11 +59,13 @@ public class LibraryTests {
         assertFalse(book.isBorrowed());
     }
 
+    //to verify returned book agan returned throws exception or not
     @Test
     public void testBookReturnFailure(){
         assertThrows(BookNotBorrowed.class,()->library.bookReturn(book.getIsbn()));
     }
 
+    //to verify shows all availble book or not
     @Test
     public void testViewAvailableBooks() throws Exception {
         assertEquals(1,library.viewAvailabeBooks().size());

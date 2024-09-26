@@ -2,7 +2,6 @@ package Main;
 
 import Exceptions.BookNotAvailable;
 import Exceptions.BookNotBorrowed;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +9,14 @@ import java.util.stream.Collectors;
 
 public class Library implements LibraryInterface{
 
+    //to store books with their isbn as the key and the bookinterfac object
     private final Map<String, BookInterface> books;
 
     public Library() {
         this.books = new HashMap<>();
     }
 
+    //method to add new book in library
     @Override
     public void addBook(BookInterface book) throws Exception {
         if(books.containsKey(book.getIsbn())){
@@ -24,6 +25,7 @@ public class Library implements LibraryInterface{
         books.put(book.getIsbn(),book);
     }
 
+    //method to borrow book from libray
     @Override
     public void bookBorrow(String isbn) throws Exception {
         BookInterface book = books.get(isbn);
@@ -39,6 +41,7 @@ public class Library implements LibraryInterface{
 
     }
 
+    //method to return book to library
     @Override
     public void bookReturn(String isbn) throws Exception {
         BookInterface book = books.get(isbn);
@@ -52,6 +55,7 @@ public class Library implements LibraryInterface{
         }
     }
 
+    //method to list the available books
     @Override
     public List<BookInterface> viewAvailabeBooks() {
         return books.values().stream()

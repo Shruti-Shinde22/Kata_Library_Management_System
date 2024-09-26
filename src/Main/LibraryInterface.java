@@ -1,5 +1,4 @@
 package Main;
-
 import java.util.List;
 
 public interface LibraryInterface {

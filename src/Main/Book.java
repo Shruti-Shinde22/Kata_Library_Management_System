@@ -15,7 +15,7 @@ public class Book implements BookInterface {
         this.title = title;
         this.author = author;
         this.year = year;
-        this.borrowed = false;
+        this.borrowed = false; //by default the book is not borrowed
     }
 
 
@@ -39,6 +39,8 @@ public class Book implements BookInterface {
         return year;
     }
 
+
+    //method to borrow the book
     @Override
     public void bookBorrow() throws BookNotAvailable {
         if(borrowed){
@@ -47,6 +49,7 @@ public class Book implements BookInterface {
         borrowed=true;
     }
 
+    //method to return the book
     @Override
     public void bookReturn() throws BookNotBorrowed {
         if(!borrowed){
@@ -55,6 +58,8 @@ public class Book implements BookInterface {
         borrowed =false;
     }
 
+
+    //book is currently borrowed or not
     @Override
     public boolean isBorrowed() {
         return borrowed;
