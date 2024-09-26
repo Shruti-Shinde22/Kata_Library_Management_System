@@ -1,5 +1,7 @@
 package Test;
 
+import Exceptions.BookNotAvailable;
+import Exceptions.BookNotBorrowed;
 import Main.Book;
 import Main.BookInterface;
 
@@ -56,7 +58,7 @@ public class BookTests {
         }catch(Exception e){
             throw new Exception(e);
         }
-        assertThrows(Exception.class, ()-> book.bookBorrow());
+        assertThrows(BookNotAvailable.class, ()-> book.bookBorrow());
     }
 
     @Test
@@ -73,6 +75,6 @@ public class BookTests {
 
     @Test
     public void testBookReturnFailure(){
-        assertThrows(Exception.class, ()-> book.bookReturn());
+        assertThrows(BookNotBorrowed.class, ()-> book.bookReturn());
     }
 }

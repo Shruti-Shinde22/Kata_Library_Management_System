@@ -1,5 +1,8 @@
 package Main;
 
+import Exceptions.BookNotAvailable;
+import Exceptions.BookNotBorrowed;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +30,8 @@ public class Library implements LibraryInterface{
         if(book!=null){
             try{
                 book.bookBorrow();
-            }catch(Exception e){
-                throw new Exception(e);
+            }catch(BookNotAvailable e){
+                throw e;
             }
         }else{
             throw new Exception("Book not found!!");
@@ -41,7 +44,7 @@ public class Library implements LibraryInterface{
         BookInterface book = books.get(isbn);
         if(book!=null){
             if(!book.isBorrowed()){
-                throw new Exception("Book not borrowed");
+                throw new BookNotBorrowed("Book not borrowed");
             }
             book.bookReturn();
         }else{

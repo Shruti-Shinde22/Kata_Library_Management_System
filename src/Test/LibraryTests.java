@@ -1,5 +1,7 @@
 package Test;
 
+import Exceptions.BookNotAvailable;
+import Exceptions.BookNotBorrowed;
 import Main.Book;
 import Main.BookInterface;
 import Main.Library;
@@ -43,7 +45,7 @@ public class LibraryTests {
     @Test
     public void testBookBorrowFailure() throws Exception {
         library.bookBorrow(book.getIsbn());
-        assertThrows(Exception.class, ()->library.bookBorrow(book.getIsbn()));
+        assertThrows(BookNotAvailable.class, ()->library.bookBorrow(book.getIsbn()));
     }
 
     @Test
@@ -55,7 +57,7 @@ public class LibraryTests {
 
     @Test
     public void testBookReturnFailure(){
-        assertThrows(Exception.class,()->library.bookReturn(book.getIsbn()));
+        assertThrows(BookNotBorrowed.class,()->library.bookReturn(book.getIsbn()));
     }
 
     @Test

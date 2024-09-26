@@ -1,5 +1,8 @@
 package Main;
 
+import Exceptions.BookNotAvailable;
+import Exceptions.BookNotBorrowed;
+
 public class Book implements BookInterface {
     private final String isbn;
     private final String title;
@@ -37,17 +40,17 @@ public class Book implements BookInterface {
     }
 
     @Override
-    public void bookBorrow() throws Exception {
+    public void bookBorrow() throws BookNotAvailable {
         if(borrowed){
-            throw new Exception("Book already Borrowed");
+            throw new BookNotAvailable("Book already Borrowed");
         }
         borrowed=true;
     }
 
     @Override
-    public void bookReturn() throws Exception{
+    public void bookReturn() throws BookNotBorrowed {
         if(!borrowed){
-            throw new Exception("Book not Borrowed");
+            throw new BookNotBorrowed("Book not Borrowed");
         }
         borrowed =false;
     }
